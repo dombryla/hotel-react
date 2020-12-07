@@ -4,14 +4,15 @@ import "./navigation.css";
 export const Navigation: React.FC = () => {
   return (
     <>
-      <div className="navigation">
-        <div className="navigationItem logo">good hotel</div>
-        <div className="navigationItem">New director</div>
-        <div className="navigationItem">New manager</div>
-        <div className="navigationItem">List managers</div>
-        <div className="navigationItem">Contact</div>
-        <div className="navigationItem toRight">My profile</div>
-      </div>
+      <ul className="navigation">
+        <li className="navigationItem logo">good hotel</li>
+        <li className="navigationItem">New director</li>
+        <li className="navigationItem">New manager</li>
+        <li className="navigationItem">List managers</li>
+        <li className="navigationItem">Contact</li>
+        <li className="navigationItem toRight">My profile</li>
+        <li className="navigationItem ">Logout</li>
+      </ul>
     </>
   );
 };
