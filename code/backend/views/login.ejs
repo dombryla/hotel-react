@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/login.css">
+
+<div class="logo">
+    Good Hotel
+</div>
+<div id="loginWrapper">
+    <form action='/login' method='POST'>
+        <input type="text" id='login' name='login' placeholder="login">
+        <input type="password" id='password' name='password' placeholder="password">
+        <% if(message.length>0){ %>
+            <div class="errorMessage"><%= message %></div>
+        <% } %>
+        <input type="submit" value="Log In">
+    </form>
+</div>
+

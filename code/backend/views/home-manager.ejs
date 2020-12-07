@@ -1,0 +1,19 @@
+<% include partials/header.ejs %>
+<% if(message.length>0){ %>
+    <div class="correctMessage"><%= message %></div>
+<% } %>
+<div class='wrapper'>
+    <div class='add tile' onclick="location.href='/hire/new-worker'">
+        Hire a worker
+    </div>
+    <div class='employees-list tile' onclick="location.href='/list/workers'">
+        View list of Employees
+    </div>
+    <div class='contact tile'>
+       Contact
+    </div>
+        <div id='photo-hotel'>
+
+        </div>
+</div>
+</div>
