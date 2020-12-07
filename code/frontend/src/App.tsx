@@ -1,8 +1,9 @@
 import React from "react";
+import {LoginPage} from "./pages/login-page";
 import "./App.css";
 
 const App: React.FC = () => {
-  return <div className="App"></div>;
+  return <LoginPage></LoginPage>;
 };
 
 export default App;

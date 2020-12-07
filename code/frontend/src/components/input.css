@@ -1,0 +1,12 @@
+.loginInput {
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: inherit;
+  border-bottom: 2px solid #b8b8b8;
+  color: #32a859;
+  margin-top: 15px;
+}
+
+.loginInput:focus {
+  border-bottom-color: #32a859;
+}
