@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Input} from "../components/input";
+import {SubmitButton} from "../components/submit-button";
 import {getWorkerData} from "../workerBackendFrontend";
 import "./login-page.css";
 
@@ -37,16 +38,7 @@ export const LoginPage: React.FC = () => {
           handleChange={handleChangePassword}
           value={password}
         ></Input>
-        <button
-          className="loginButton"
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-        >
-          Login
-        </button>
+        <SubmitButton Click={handleSubmit}>Login</SubmitButton>
       </form>
     </div>
   );
