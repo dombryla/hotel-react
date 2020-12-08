@@ -24,3 +24,6 @@
   color: #32a859;
   font-weight: bold;
 }
+.selected {
+  border-bottom: 3px solid #32a859;
+}
