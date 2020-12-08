@@ -4,7 +4,7 @@ import {UserPanel} from "./pages/user-panel";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [gotAcces, setGotAcces] = useState<boolean>(true);
+  const [gotAcces, setGotAcces] = useState<boolean>(false);
   // const [login, setLogin] = useState("");
   // const [password, setPassword] = useState("");
 
