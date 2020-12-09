@@ -20,8 +20,7 @@ const App: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    console.log(getWorkerData({login, password}));
-    getWorkerData({login, password});
+    getWorkerData({login, password}).then((data) => console.log(data));
   };
 
   return (
