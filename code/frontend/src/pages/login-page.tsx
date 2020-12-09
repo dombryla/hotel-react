@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Input} from "../components/input";
 import {SubmitButton} from "../components/submit-button";
+import {MsgRed} from "../components/msg-red";
 import "./login-page.css";
 
 interface LoginPageProps {
@@ -9,6 +10,7 @@ interface LoginPageProps {
   onChangeLogin(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangePassword(e: React.ChangeEvent<HTMLInputElement>): void;
   onClick: any;
+  msg: string;
 }
 
 export const LoginPage = ({
@@ -17,6 +19,7 @@ export const LoginPage = ({
   onChangeLogin,
   onChangePassword,
   onClick,
+  msg,
 }: LoginPageProps) => {
   return (
     <div className="loginContainer">
@@ -36,6 +39,7 @@ export const LoginPage = ({
           handleChange={onChangePassword}
           value={password}
         ></Input>
+        <MsgRed>{msg}</MsgRed>
         <SubmitButton Click={onClick}>Login</SubmitButton>
       </form>
     </div>

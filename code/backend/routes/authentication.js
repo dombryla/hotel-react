@@ -114,7 +114,7 @@ module.exports = {
 function renderLoginPage(req, res, msg) {
   result = {
     gotAccess: false,
-    user: msg,
+    msg: msg,
   };
   return res.status(401).json(result);
 }
