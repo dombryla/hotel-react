@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import "./navigation.css";
 
-export const Navigation: React.FC = () => {
+export const Navigation = ({logout}: any) => {
   return (
     <>
       <nav>
@@ -47,7 +47,9 @@ export const Navigation: React.FC = () => {
               My profile
             </NavLink>
           </li>
-          <li className="navigationItem">Logout</li>
+          <button className="navigationItem" onClick={logout}>
+            Logout
+          </button>
         </ul>
       </nav>
     </>

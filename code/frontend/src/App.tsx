@@ -3,8 +3,11 @@ import {LoginPage} from "./pages/login-page";
 import {UserPanel} from "./pages/user-panel";
 import {getWorkerData} from "./workerBackendFrontend";
 import "./App.css";
+import {UserContext} from "./userContext";
 
 const App: React.FC = () => {
+  const [user, setUser] = useState("");
+
   const [gotAcces, setGotAcces] = useState<boolean>(false);
   const [loginMessage, setLoginMessage] = useState<string>("");
   const [login, setLogin] = useState<string>("");
@@ -21,6 +24,7 @@ const App: React.FC = () => {
     getWorkerData({login, password}).then((data) => {
       if (data.gotAccess === true) {
         setGotAcces(true);
+        setUser(data.user);
       } else {
         setLoginMessage(data.msg);
         setLogin("");
@@ -29,10 +33,16 @@ const App: React.FC = () => {
     });
   };
 
+  const logout = () => {
+    setGotAcces(false);
+  };
+
   return (
     <>
       {gotAcces ? (
-        <UserPanel />
+        <UserContext.Provider value={{user}}>
+          <UserPanel logout={logout} />
+        </UserContext.Provider>
       ) : (
         <LoginPage
           login={login}
