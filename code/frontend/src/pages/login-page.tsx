@@ -1,25 +1,23 @@
 import React, {useState} from "react";
 import {Input} from "../components/input";
 import {SubmitButton} from "../components/submit-button";
-import {getWorkerData} from "../workerBackendFrontend";
 import "./login-page.css";
 
-export const LoginPage: React.FC = () => {
-  const [login, setLogin] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+interface LoginPageProps {
+  login: string;
+  password: string;
+  onChangeLogin(e: React.ChangeEvent<HTMLInputElement>): void;
+  onChangePassword(e: React.ChangeEvent<HTMLInputElement>): void;
+  onClick: any;
+}
 
-  const handleChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-  };
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log(getWorkerData({login, password}));
-    getWorkerData({login, password});
-  };
-
+export const LoginPage = ({
+  login,
+  password,
+  onChangeLogin,
+  onChangePassword,
+  onClick,
+}: LoginPageProps) => {
   return (
     <div className="loginContainer">
       <form className="loginForm">
@@ -28,17 +26,17 @@ export const LoginPage: React.FC = () => {
           type="text"
           name="login"
           placeholder="username"
-          handleChange={handleChangeLogin}
+          handleChange={onChangeLogin}
           value={login}
         ></Input>
         <Input
           type="password"
           name="password"
           placeholder="password"
-          handleChange={handleChangePassword}
+          handleChange={onChangePassword}
           value={password}
         ></Input>
-        <SubmitButton Click={handleSubmit}>Login</SubmitButton>
+        <SubmitButton Click={onClick}>Login</SubmitButton>
       </form>
     </div>
   );

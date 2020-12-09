@@ -2,7 +2,7 @@ import React from "react";
 import "./submit-button.css";
 
 interface SubmitButtonProps {
-  Click(): any;
+  Click(): void;
   children: string;
 }
 
