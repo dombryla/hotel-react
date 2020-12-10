@@ -1,5 +1,22 @@
 import React from "react";
+import "./submit-button.css";
 
-export const SubmitButton = () => {
-  return <button>Login</button>;
+interface SubmitButtonProps {
+  Click(): void;
+  children: string;
+}
+
+export const SubmitButton = ({Click, children}: SubmitButtonProps) => {
+  return (
+    <button
+      className="submitButton"
+      type="submit"
+      onClick={(e) => {
+        e.preventDefault();
+        Click();
+      }}
+    >
+      {children}
+    </button>
+  );
 };

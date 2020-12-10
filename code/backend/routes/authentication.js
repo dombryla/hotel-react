@@ -45,11 +45,19 @@ module.exports = {
                 break;
             }
           } else {
-            renderLoginPage(req, res, "Password is incorrect");
+            renderLoginPage(
+              req,
+              res,
+              "Login Failed. Please check username/password."
+            );
           }
         });
       } else {
-        renderLoginPage(req, res, "Username is not exist");
+        renderLoginPage(
+          req,
+          res,
+          "Login Failed. Please check username/password."
+        );
       }
     });
   },
@@ -106,7 +114,7 @@ module.exports = {
 function renderLoginPage(req, res, msg) {
   result = {
     gotAccess: false,
-    user: msg,
+    msg: msg,
   };
   return res.status(401).json(result);
 }

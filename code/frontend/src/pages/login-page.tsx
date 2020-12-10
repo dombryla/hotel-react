@@ -1,24 +1,26 @@
-import React, {useState} from "react";
+import React from "react";
 import {Input} from "../components/input";
-import {getWorkerData} from "../workerBackendFrontend";
+import {SubmitButton} from "../components/submit-button";
+import {MsgRed} from "../components/msg-red";
 import "./login-page.css";
 
-export const LoginPage: React.FC = () => {
-  const [login, setLogin] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+interface LoginPageProps {
+  login: string;
+  password: string;
+  onChangeLogin(e: React.ChangeEvent<HTMLInputElement>): void;
+  onChangePassword(e: React.ChangeEvent<HTMLInputElement>): void;
+  onClick: any;
+  msg: string;
+}
 
-  const handleChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value);
-  };
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    console.log(getWorkerData({login, password}));
-    getWorkerData({login, password});
-  };
-
+export const LoginPage = ({
+  login,
+  password,
+  onChangeLogin,
+  onChangePassword,
+  onClick,
+  msg,
+}: LoginPageProps) => {
   return (
     <div className="loginContainer">
       <form className="loginForm">
@@ -27,26 +29,18 @@ export const LoginPage: React.FC = () => {
           type="text"
           name="login"
           placeholder="username"
-          handleChange={handleChangeLogin}
+          handleChange={onChangeLogin}
           value={login}
         ></Input>
         <Input
           type="password"
           name="password"
           placeholder="password"
-          handleChange={handleChangePassword}
+          handleChange={onChangePassword}
           value={password}
         ></Input>
-        <button
-          className="loginButton"
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-        >
-          Login
-        </button>
+        <MsgRed>{msg}</MsgRed>
+        <SubmitButton Click={onClick}>Login</SubmitButton>
       </form>
     </div>
   );
