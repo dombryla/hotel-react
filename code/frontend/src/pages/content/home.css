@@ -1,0 +1,6 @@
+.homePage {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  justify-content: space-around;
+}
