@@ -1,57 +1,80 @@
-import React from "react";
+import React, {useContext} from "react";
 import {NavLink} from "react-router-dom";
+import {UserContext} from "../userContext";
 import "./navigation.css";
 
+const list = [
+  {
+    name: "Good Hotel",
+    path: "/",
+    exact: true,
+    status: "all",
+    className: "logo",
+  },
+  {
+    name: "New director",
+    path: "/hire/new-director",
+    exact: false,
+    status: "director",
+  },
+  {
+    name: "New manager",
+    path: "/hire/new-manager",
+    exact: false,
+    status: "director",
+  },
+  {
+    name: "New worker",
+    path: "/hire/new-worker",
+    exact: false,
+    status: "manager",
+  },
+  {
+    name: "List Manager",
+    path: "/list/managers",
+    exact: false,
+    status: "director",
+  },
+  {
+    name: "List Worker",
+    path: "/list/workers",
+    exact: false,
+    status: "manager",
+  },
+  {name: "Contact", path: "/Contact", exact: false, status: "all"},
+  {
+    name: "My Profile",
+    path: "/profile",
+    exact: false,
+    status: "all",
+    className: "toRight",
+  },
+];
+
 export const Navigation = ({logout}: any) => {
+  const {user} = useContext(UserContext);
+  const {status} = user;
+  const navigation = list
+    .filter((item) => item.status === status || item.status === "all")
+    .map((item) => (
+      <li key={item.name} className={`navigationItem ${item.className}`}>
+        <NavLink
+          to={item.path}
+          exact={item.exact ? item.exact : false}
+          activeClassName="selected"
+        >
+          {item.name}
+        </NavLink>
+      </li>
+    ));
   return (
     <>
-      <nav>
-        <ul className="navigation">
-          <li className="navigationItem logo">
-            <NavLink to="/" exact activeClassName="selected">
-              good hotel
-            </NavLink>
-          </li>
-          <li className="navigationItem">
-            <NavLink to="/hire/new-director" activeClassName="selected">
-              New director
-            </NavLink>
-          </li>
-          <li className="navigationItem">
-            <NavLink to="/hire/new-manager" activeClassName="selected">
-              New manager
-            </NavLink>
-          </li>
-          <li className="navigationItem">
-            <NavLink to="/hire/new-worker" activeClassName="selected">
-              New worker
-            </NavLink>
-          </li>
-          <li className="navigationItem">
-            <NavLink to="/list/managers" activeClassName="selected">
-              List manager
-            </NavLink>
-          </li>
-          <li className="navigationItem">
-            <NavLink to="/list/workers" activeClassName="selected">
-              List worker
-            </NavLink>
-          </li>
-          <li className="navigationItem">
-            <NavLink to="/contact" activeClassName="selected">
-              Contact
-            </NavLink>
-          </li>
-          <li className="navigationItem toRight">
-            <NavLink to="/profile" activeClassName="selected">
-              My profile
-            </NavLink>
-          </li>
-          <button className="navigationItem" onClick={logout}>
-            Logout
-          </button>
-        </ul>
-      </nav>
+      <ul className="navigation">
+        {navigation}
+        <button className="navigationItem" onClick={logout}>
+          Logout
+        </button>
+      </ul>
     </>
   );
 };
