@@ -1,0 +1,15 @@
+.inputForm {
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: inherit;
+  border-bottom: 2px solid #b8b8b8;
+  color: #32a859;
+  margin-top: 15px;
+}
+
+.inputForm__border--green {
+  border-bottom-color: #32a859;
+}
+.inputForm__border--red {
+  border-bottom-color: red;
+}
