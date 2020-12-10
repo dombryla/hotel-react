@@ -41,7 +41,7 @@ const list = [
     exact: false,
     status: "manager",
   },
-  {name: "Contact", path: "/Contact", exact: false, status: "all"},
+  {name: "Contact", path: "/contact", exact: false, status: "all"},
   {
     name: "My Profile",
     path: "/profile",
