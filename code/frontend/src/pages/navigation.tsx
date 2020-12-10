@@ -71,9 +71,7 @@ export const Navigation = ({logout}: any) => {
     <>
       <ul className="navigation">
         {navigation}
-        <button className="navigationItem" onClick={logout}>
-          Logout
-        </button>
+        <button onClick={logout}>Logout</button>
       </ul>
     </>
   );

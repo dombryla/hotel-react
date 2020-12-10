@@ -10,33 +10,37 @@ import {MyProfile} from "./my-profile";
 
 import {Switch, Route} from "react-router-dom";
 
+import "./content.css";
+
 export const Content: React.FC = () => {
   return (
-    <Switch>
-      <Route path="/" exact>
-        <Home />
-      </Route>
-      <Route path="/hire/new-director">
-        <NewDirector />
-      </Route>
-      <Route path="/hire/new-manager">
-        <NewManager />
-      </Route>
-      <Route path="/hire/new-worker">
-        <NewWorker />
-      </Route>
-      <Route path="/list/managers">
-        <ListManager />
-      </Route>
-      <Route path="/list/workers">
-        <ListWorker />
-      </Route>
-      <Route path="/contact">
-        <Contact />
-      </Route>
-      <Route path="/profile">
-        <MyProfile />
-      </Route>
-    </Switch>
+    <div className="contentContainer">
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/hire/new-director">
+          <NewDirector />
+        </Route>
+        <Route path="/hire/new-manager">
+          <NewManager />
+        </Route>
+        <Route path="/hire/new-worker">
+          <NewWorker />
+        </Route>
+        <Route path="/list/managers">
+          <ListManager />
+        </Route>
+        <Route path="/list/workers">
+          <ListWorker />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/profile">
+          <MyProfile />
+        </Route>
+      </Switch>
+    </div>
   );
 };
