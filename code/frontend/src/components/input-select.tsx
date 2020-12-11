@@ -1,6 +1,8 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
 
+import "./input-select.css";
+
 const positions = [
   {value: "Front Office Manager", path: "/hire/new-manager"},
   {value: "Receptionist", path: "/hire/new-worker"},
@@ -45,9 +47,9 @@ export const InputSelect: React.FC<InputSelectProps> = ({
     ));
 
   return (
-    <div>
+    <div className="inputSelectFormContainer">
       <label htmlFor={name}>{title}</label>
-      <select name={name} ref={reference}>
+      <select name={name} ref={reference} className="inputFormSelect">
         {options}
       </select>
     </div>

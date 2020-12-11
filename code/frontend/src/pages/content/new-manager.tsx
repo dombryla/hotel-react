@@ -142,7 +142,7 @@ export const NewManager: React.FC = () => {
             type="number"
             name="salary"
             reference={register({required: true})}
-            error={errors.phoneNumber ? true : false}
+            error={errors.salary ? true : false}
             errorMessage="This field is required"
           ></InputForm>
           <InputSelect
