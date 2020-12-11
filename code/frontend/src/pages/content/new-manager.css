@@ -1,0 +1,9 @@
+.newManagerForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.formColumn {
+  display: flex;
+  flex-direction: column;
+}

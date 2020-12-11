@@ -5,11 +5,11 @@ import "./input-form.css";
 
 interface InputFormProps {
   name: string;
-  // reference: React.RefObject<HTMLInputElement>;
   reference: any;
   error: boolean;
   errorMessage: string;
 
+  title: string;
   type?: string;
 }
 export const InputForm: React.FC<InputFormProps> = ({
@@ -18,26 +18,27 @@ export const InputForm: React.FC<InputFormProps> = ({
   error,
   errorMessage,
   type,
+  title,
 }) => {
-  const [value, setValue] = useState<string>("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
+  const [isActive, setIsActive] = useState(false);
   return (
-    <label>
-      {name}
-      <input
-        className={classNames("inputForm", {
-          "inputForm__border--green": value.length > 0,
-          "inputForm__border--red": error === true,
-        })}
-        name={name}
-        ref={reference}
-        type={type}
-        value={value}
-        onChange={handleChange}
-      ></input>
-      {error && <MsgRed>{errorMessage}</MsgRed>}
-    </label>
+    <>
+      <div className="inputFormContainer">
+        <label htmlFor={name}>{title}</label>
+        <div>
+          <input
+            className={classNames("inputForm", {
+              "inputForm__border--green": isActive === true,
+              "inputForm__border--red": error === true,
+            })}
+            onFocus={() => setIsActive(true)}
+            name={name}
+            ref={reference}
+            type={type}
+          ></input>
+          {error ? <MsgRed>{errorMessage}</MsgRed> : <MsgRed>{"   "}</MsgRed>}
+        </div>
+      </div>
+    </>
   );
 };
