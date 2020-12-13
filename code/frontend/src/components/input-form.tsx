@@ -8,7 +8,6 @@ interface InputFormProps {
   reference: any;
   error: boolean;
   errorMessage: string;
-
   title: string;
   type?: string;
 }

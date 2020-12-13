@@ -67,27 +67,33 @@ export const NewManager: React.FC = () => {
             error={errors.lastName ? true : false}
             errorMessage="This field is required"
           ></InputForm>
-          <label>
-            Sex
-            <label>
-              Female
-              <input
-                name="sex"
-                type="radio"
-                value="Female"
-                ref={register({required: true})}
-              />
-            </label>
-            <label>
-              Male
-              <input
-                name="sex"
-                type="radio"
-                value=" Male"
-                ref={register({required: true})}
-              />
-            </label>
-            {errors.sex && <MsgRed>This is required</MsgRed>}
+          <label className="inputRadioForm">
+            <div className="inputRadioForm__Label">Sex</div>
+            <div className="inputRadioFom__CheckboxArea">
+              <label className="inputRadioCheckbox">
+                <div>Female</div>
+                <div>
+                  <input
+                    name="sex"
+                    type="radio"
+                    value="Female"
+                    ref={register({required: true})}
+                  />
+                </div>
+              </label>
+              <label className="inputRadioCheckbox">
+                <div>Male</div>
+                <div>
+                  <input
+                    name="sex"
+                    type="radio"
+                    value="Male"
+                    ref={register({required: true})}
+                  />
+                </div>
+              </label>
+              {errors.sex && <MsgRed>This is required</MsgRed>}
+            </div>
           </label>
           <label>
             Birthday
