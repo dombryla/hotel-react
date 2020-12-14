@@ -1,4 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
+import {useLocation} from "react-router-dom";
+import {UserContext} from "../userContext";
+
 import {useForm} from "react-hook-form";
 import {InputForm} from "./input-form";
 import {InputSelect} from "./input-select";
@@ -6,16 +9,18 @@ import {InputData} from "./input-data";
 import {MsgRed} from "./msg-red";
 import {Button} from "./button";
 
+import {addWorker} from "../workerBackendFrontend";
+
 import "./form-hire.css";
 
-type UserProps = {
+export type UserProps = {
   login: string;
   password: string;
   email: string;
   firstName: string;
   lastName: string;
   sex: string;
-  birthdate: string;
+  birthDate: string;
   phoneNumber: string;
   street: string;
   postCode: string;
@@ -24,16 +29,26 @@ type UserProps = {
   salary: number;
   startDate: string;
   terminationDate: string;
+  employer?: number;
 };
 
-export const NewManager: React.FC = () => {
+export const FormHire: React.FC = () => {
+  const {user} = useContext(UserContext);
+  const {pathname} = useLocation();
+
+  const employer = user.directorId ? user.directorId : user.managerId;
+
   const {register, handleSubmit, errors} = useForm<UserProps>({
     mode: "all",
   });
-  const onSubmit = (data: any) => console.log(data);
+
+  const onSubmit = (data: UserProps) => {
+    addWorker({data, pathname, employer});
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="newManagerForm">
+      <form onSubmit={handleSubmit(onSubmit)} className="newWorkerForm">
         <div className="formColumn">
           <InputForm
             title="Login"
@@ -73,15 +88,15 @@ export const NewManager: React.FC = () => {
           ></InputForm>
           <label className="inputRadioForm">
             <div className="inputRadioForm__Label">Sex</div>
-            <div className="inputRadioFom__CheckboxArea">
-              <div className="mama">
+            <div className="inputRadioForm__CheckboxArea">
+              <div className="inputRadioForm__Position">
                 <label className="inputRadioCheckbox">
                   <div>Female</div>
                   <div>
                     <input
                       name="sex"
                       type="radio"
-                      value="Female"
+                      value="f"
                       ref={register({required: true})}
                     />
                   </div>
@@ -92,7 +107,7 @@ export const NewManager: React.FC = () => {
                     <input
                       name="sex"
                       type="radio"
-                      value="Male"
+                      value="m"
                       ref={register({required: true})}
                     />
                   </div>
@@ -103,9 +118,9 @@ export const NewManager: React.FC = () => {
           </label>
           <InputData
             title="Birth Date"
-            name="birthdate"
+            name="birthDate"
             reference={register({required: true})}
-            error={errors.birthdate ? true : false}
+            error={errors.birthDate ? true : false}
             errorMessage="This field is required"
           ></InputData>
           <InputForm

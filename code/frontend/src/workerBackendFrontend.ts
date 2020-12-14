@@ -1,3 +1,5 @@
+import {UserProps} from "./components/form-hire";
+
 const url = "http://localhost:2000";
 
 interface getWorkerDataProps {
@@ -22,5 +24,33 @@ export const getWorkerData = ({login, password}: getWorkerDataProps) => {
       throw Error(response.statusText);
     })
     .then((response) => response.json())
+    .catch((error) => console.log(error, "Something went bad"));
+};
+
+interface addWorkerProps {
+  data: UserProps;
+  pathname: string;
+  employer: number;
+}
+
+export const addWorker = ({data, pathname, employer}: addWorkerProps) => {
+  data.employer = employer;
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  console.log(data);
+  fetch(`${url}${pathname}`, options)
+    .then((response) => {
+      console.log(response);
+      if (response.ok) {
+        return response;
+      }
+      throw Error(response.statusText);
+    })
     .catch((error) => console.log(error, "Something went bad"));
 };

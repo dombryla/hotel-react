@@ -7,7 +7,7 @@ const app = express();
 const session = require("express-session");
 const cors = require("cors");
 
-const { getHomePage } = require("./routes/index");
+const {getHomePage} = require("./routes/index");
 const {
   hirePage,
   hire,
@@ -51,7 +51,7 @@ global.db = db;
 app.set("port", process.env.port || port); // set express to use this port
 app.set("views", __dirname + "/views"); // set express to look in this folder to render our view
 app.set("view engine", "ejs"); // configure template engine
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json()); // parse form data client
 app.use(express.static(path.join(__dirname, "/public"))); // configure express to use public folder
 app.use(fileUpload()); // configure fileupload
@@ -68,6 +68,7 @@ app.get("/", checkAuthenticated, getHomePage);
 
 app.get("/hire/:status", checkAuthenticated, hirePage);
 app.post("/hire/:status", validate, checkLoginExist, checkValidationHire, hire);
+// app.post("/hire/:status", hire);
 
 // app.post("/list/:status", checkAuthenticated, staffList);
 app.get("/list/:status", staffList);

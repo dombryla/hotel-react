@@ -7,6 +7,7 @@ import {ListManager} from "./list-manager";
 import {ListWorker} from "./list-worker";
 import {Contact} from "./contact";
 import {MyProfile} from "./my-profile";
+import {FormHire} from "../../components/form-hire";
 
 import {Switch, Route} from "react-router-dom";
 
@@ -20,13 +21,13 @@ export const Content: React.FC = () => {
           <Home />
         </Route>
         <Route path="/hire/new-director">
-          <NewDirector />
+          <FormHire />
         </Route>
         <Route path="/hire/new-manager">
-          <NewManager />
+          <FormHire />
         </Route>
         <Route path="/hire/new-worker">
-          <NewWorker />
+          <FormHire />
         </Route>
         <Route path="/list/managers">
           <ListManager />

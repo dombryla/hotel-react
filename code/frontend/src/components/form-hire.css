@@ -1,4 +1,4 @@
-.newManagerForm {
+.newWorkerForm {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -24,7 +24,7 @@
   width: 110px;
 }
 
-.inputRadioFom__CheckboxArea {
+.inputRadioForm__CheckboxArea {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,7 +39,7 @@
   width: 80px;
 }
 
-.mama {
+.inputRadioForm__Position {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
