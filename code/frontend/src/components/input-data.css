@@ -1,0 +1,14 @@
+.inputFormDataContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 350px;
+  height: 51px;
+}
+
+.inputFormData {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 207px;
+}

@@ -1,12 +1,12 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {InputForm} from "../../components/input-form";
-import {InputSelect} from "../../components/input-select";
-import {InputData} from "../../components/input-data";
-import {MsgRed} from "../../components/msg-red";
-import {Button} from "../../components/button";
+import {InputForm} from "./input-form";
+import {InputSelect} from "./input-select";
+import {InputData} from "./input-data";
+import {MsgRed} from "./msg-red";
+import {Button} from "./button";
 
-import "./new-manager.css";
+import "./form-hire.css";
 
 type UserProps = {
   login: string;

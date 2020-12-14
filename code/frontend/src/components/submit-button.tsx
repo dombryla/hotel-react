@@ -2,11 +2,14 @@ import React from "react";
 import "./submit-button.css";
 
 interface SubmitButtonProps {
-  Click(): void;
+  Click?: any;
   children: string;
 }
 
-export const SubmitButton = ({Click, children}: SubmitButtonProps) => {
+export const SubmitButton: React.FC<SubmitButtonProps> = ({
+  Click,
+  children,
+}) => {
   return (
     <button
       className="submitButton"
