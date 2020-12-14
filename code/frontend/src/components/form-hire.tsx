@@ -55,15 +55,17 @@ export const FormHire: React.FC = () => {
             name="login"
             reference={register({required: true, minLength: 5})}
             error={errors.login ? true : false}
-            errorMessage="This field is required"
+            errorMessage="Login must be at least 5 chars long."
           ></InputForm>
           <InputForm
             title="Password"
             name="password"
             type="password"
-            reference={register({required: true})}
+            reference={register({
+              pattern: /(?=.*[a-z]{1,})(?=.*[A-Z]{1,})(?=.*[1-9]{1,})[\w!@#$%^&*łążźćśńóŁĄŻŹĆŃÓ()+]{5,16}/,
+            })}
             error={errors.password ? true : false}
-            errorMessage="This field is required"
+            errorMessage="Password includes a lower, upper case and a number."
           ></InputForm>
           <InputForm
             title="Email"
@@ -127,9 +129,9 @@ export const FormHire: React.FC = () => {
             title="Phone number"
             type="number"
             name="phoneNumber"
-            reference={register({required: true})}
+            reference={register({required: true, minLength: 9, maxLength: 9})}
             error={errors.phoneNumber ? true : false}
-            errorMessage="This field is required"
+            errorMessage="Phone number consist 9 digits."
           ></InputForm>
           <InputForm
             title="Street"
@@ -143,9 +145,9 @@ export const FormHire: React.FC = () => {
           <InputForm
             title="Post code"
             name="postCode"
-            reference={register({required: true})}
+            reference={register({pattern: /^[0-9]{2}-[0-9]{3}$/})}
             error={errors.postCode ? true : false}
-            errorMessage="This field is required"
+            errorMessage="Please enter valid post code."
           ></InputForm>
           <InputForm
             title="City"
@@ -158,9 +160,9 @@ export const FormHire: React.FC = () => {
             title="PESEL"
             type="number"
             name="pesel"
-            reference={register({required: true})}
+            reference={register({required: true, minLength: 11, maxLength: 11})}
             error={errors.pesel ? true : false}
-            errorMessage="This field is required"
+            errorMessage="PESEL consist of 11 digits."
           ></InputForm>
           <InputForm
             title="Salary"

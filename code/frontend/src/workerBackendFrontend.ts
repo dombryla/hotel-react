@@ -46,7 +46,6 @@ export const addWorker = ({data, pathname, employer}: addWorkerProps) => {
   console.log(data);
   fetch(`${url}${pathname}`, options)
     .then((response) => {
-      console.log(response);
       if (response.ok) {
         return response;
       }
