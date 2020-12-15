@@ -73,9 +73,11 @@ export const FormHire: React.FC = () => {
           <InputForm
             title="Email"
             name="email"
-            reference={register({required: true})}
+            reference={register({
+              pattern: /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/,
+            })}
             error={errors.email ? true : false}
-            errorMessage="This field is required"
+            errorMessage="Please enter the valid email."
           ></InputForm>
           <InputForm
             title="First name"
