@@ -53,3 +53,33 @@ export const addWorker = ({data, pathname, employer}: addWorkerProps) => {
     })
     .catch((error) => console.log(error, "Something went bad"));
 };
+
+export interface getWorkerListProps {
+  employer: string;
+  status: string;
+  pathname: string;
+}
+
+export const getWorkerList = ({
+  employer,
+  status,
+  pathname,
+}: getWorkerListProps) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      status: status,
+      employerId: employer,
+    },
+  };
+  return fetch(`${url}${pathname}`, options)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      throw Error(response.statusText);
+    })
+    .then((response) => response.json())
+    .catch((error) => console.log(error, "Something went bad"));
+};
