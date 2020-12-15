@@ -4,6 +4,8 @@ import {UserContext} from "../../userContext";
 import {useLocation} from "react-router-dom";
 import {UserProps} from "../../components/form-hire";
 
+import "./list-worker.css";
+
 export const ListWorker: React.FC = () => {
   const {user} = useContext(UserContext);
   const status = user.status;
@@ -13,7 +15,6 @@ export const ListWorker: React.FC = () => {
 
   useEffect(() => {
     getWorkerList({employer, status, pathname}).then((data) => {
-      console.log(data);
       setDataWorker(data);
     });
   }, [employer, status, pathname]);
@@ -26,6 +27,7 @@ export const ListWorker: React.FC = () => {
         <th>{i + 1}</th>
         <td>{worker.firstName}</td>
         <td>{worker.lastName}</td>
+        <td>{worker.email}</td>
         <td>{worker.sex}</td>
         <td>{worker.city}</td>
         <td>{worker.salary}</td>
@@ -36,24 +38,23 @@ export const ListWorker: React.FC = () => {
     );
   });
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Sex</th>
-            <th>City</th>
-            <th>Salary</th>
-            <th>Position</th>
-            <th>StartDate</th>
-            <th>TerminationDate</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>{tableWorker}</tbody>
-      </table>
-    </div>
+    <table className="contentTable">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Sex</th>
+          <th>City</th>
+          <th>Salary</th>
+          <th>Position</th>
+          <th>StartDate</th>
+          <th>TerminationDate</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>{tableWorker}</tbody>
+    </table>
   );
 };

@@ -2,10 +2,10 @@ import {UserProps} from "./components/form-hire";
 
 const url = "http://localhost:2000";
 
-interface getWorkerDataProps {
+type getWorkerDataProps = {
   login: string;
   password: string;
-}
+};
 
 export const getWorkerData = ({login, password}: getWorkerDataProps) => {
   const options = {
