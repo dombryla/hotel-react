@@ -14,6 +14,8 @@ import {addWorker} from "../workerBackendFrontend";
 import "./form-hire.css";
 
 export type UserProps = {
+  directorId?: number;
+  managerId?: number;
   login: string;
   password: string;
   email: string;
@@ -27,6 +29,7 @@ export type UserProps = {
   city: string;
   pesel: string;
   salary: number;
+  position: string;
   startDate: string;
   terminationDate: string;
   employer?: number;
