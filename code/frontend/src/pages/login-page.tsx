@@ -11,6 +11,7 @@ interface LoginPageProps {
   onChangePassword(e: React.ChangeEvent<HTMLInputElement>): void;
   onClick: any;
   msg: string;
+  loading: boolean;
 }
 
 export const LoginPage = ({
@@ -20,6 +21,7 @@ export const LoginPage = ({
   onChangePassword,
   onClick,
   msg,
+  loading,
 }: LoginPageProps) => {
   return (
     <div className="loginContainer">
@@ -40,6 +42,7 @@ export const LoginPage = ({
           value={password}
         ></Input>
         <MsgRed>{msg}</MsgRed>
+        {loading && <pre>loading...</pre>}
         <SubmitButton Click={onClick}>Login</SubmitButton>
       </form>
     </div>

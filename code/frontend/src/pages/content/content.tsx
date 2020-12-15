@@ -1,6 +1,5 @@
 import React from "react";
 import {Home} from "./home";
-import {ListManager} from "./list-manager";
 import {ListWorker} from "./list-worker";
 import {Contact} from "./contact";
 import {MyProfile} from "./my-profile";
@@ -27,7 +26,7 @@ export const Content: React.FC = () => {
           <FormHire />
         </Route>
         <Route path="/list/managers">
-          <ListManager />
+          <ListWorker />
         </Route>
         <Route path="/list/workers">
           <ListWorker />

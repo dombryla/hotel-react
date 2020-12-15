@@ -13,6 +13,7 @@ const App: React.FC = () => {
   const [loginMessage, setLoginMessage] = useState<string>("");
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
@@ -22,6 +23,7 @@ const App: React.FC = () => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     getWorkerData({login, password}).then((data) => {
       if (data.gotAccess === true) {
         setGotAcces(true);
@@ -31,6 +33,7 @@ const App: React.FC = () => {
         setLogin("");
         setPassword("");
       }
+      setLoading(false);
     });
   };
 
@@ -52,6 +55,7 @@ const App: React.FC = () => {
           onChangeLogin={handleChangeLogin}
           onChangePassword={handleChangePassword}
           onClick={handleSubmit}
+          loading={loading}
         />
       )}
     </>
