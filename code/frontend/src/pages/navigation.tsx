@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React from "react";
 import {NavLink} from "react-router-dom";
-import {UserContext} from "../userContext";
+import {useUser} from "../userContext";
 import "./navigation.css";
 
 const list = [
@@ -52,7 +52,7 @@ const list = [
 ];
 
 export const Navigation = ({logout}: any) => {
-  const {user} = useContext(UserContext);
+  const user = useUser();
   const {status} = user;
   const navigation = list
     .filter((item) => item.status === status || item.status === "all")

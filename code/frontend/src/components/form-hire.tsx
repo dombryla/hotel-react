@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React from "react";
 import {useLocation} from "react-router-dom";
-import {UserContext} from "../userContext";
+import {useUser} from "../userContext";
 
 import {useForm} from "react-hook-form";
 import {InputForm} from "./input-form";
@@ -36,7 +36,7 @@ export type UserProps = {
 };
 
 export const FormHire: React.FC = () => {
-  const {user} = useContext(UserContext);
+  const user = useUser();
   const {pathname} = useLocation();
 
   const employer = user.directorId ? user.directorId : user.managerId;

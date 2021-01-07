@@ -1,13 +1,13 @@
-import React, {useState, useContext, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {getWorkerList} from "../../workerBackendFrontend";
-import {UserContext} from "../../userContext";
+import {useUser} from "../../userContext";
 import {useLocation} from "react-router-dom";
 import {UserProps} from "../../components/form-hire";
 
 import "./list-worker.css";
 
 export const ListWorker: React.FC = () => {
-  const {user} = useContext(UserContext);
+  const user = useUser();
   const status = user.status;
   const employer = user.directorId ? user.directorId : user.managerId;
   const {pathname} = useLocation();

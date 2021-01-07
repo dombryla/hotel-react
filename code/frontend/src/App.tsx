@@ -1,19 +1,17 @@
-import React, {useState, useMemo} from "react";
+import React, {useState} from "react";
 import {LoginPage} from "./pages/login-page";
 import {UserPanel} from "./pages/user-panel";
 import {getWorkerData} from "./workerBackendFrontend";
 import "./App.css";
-import {UserContext} from "./userContext";
+import {useSetUser} from "./userContext";
 
 const App: React.FC = () => {
-  const [user, setUser] = useState("");
-  const providerValue = useMemo(() => ({user}), [user]);
-
   const [gotAcces, setGotAcces] = useState<boolean>(false);
   const [loginMessage, setLoginMessage] = useState<string>("");
   const [login, setLogin] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const setUser = useSetUser();
 
   const handleChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(e.target.value);
@@ -44,9 +42,7 @@ const App: React.FC = () => {
   return (
     <>
       {gotAcces ? (
-        <UserContext.Provider value={providerValue}>
-          <UserPanel logout={logout} />
-        </UserContext.Provider>
+        <UserPanel logout={logout} />
       ) : (
         <LoginPage
           login={login}
