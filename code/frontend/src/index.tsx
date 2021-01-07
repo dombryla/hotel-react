@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter as Router} from "react-router-dom";
-import {UserProvider} from "./userContext";
+import {UserProvider} from "./context/userContext";
 
 import "./index.css";
 import App from "./App";

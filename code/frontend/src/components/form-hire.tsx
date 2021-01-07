@@ -1,6 +1,6 @@
 import React from "react";
 import {useLocation} from "react-router-dom";
-import {useUser} from "../userContext";
+import {useUser} from "../context/userContext";
 
 import {useForm} from "react-hook-form";
 import {InputForm} from "./input-form";

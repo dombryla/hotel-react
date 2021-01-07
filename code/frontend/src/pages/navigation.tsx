@@ -1,6 +1,6 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import {useUser} from "../userContext";
+import {useUser} from "../context/userContext";
 import "./navigation.css";
 
 const list = [

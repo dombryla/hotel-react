@@ -3,7 +3,7 @@ import {LoginPage} from "./pages/login-page";
 import {UserPanel} from "./pages/user-panel";
 import {getWorkerData} from "./workerBackendFrontend";
 import "./App.css";
-import {useSetUser} from "./userContext";
+import {useSetUser} from "./context/userContext";
 
 const App: React.FC = () => {
   const [gotAcces, setGotAcces] = useState<boolean>(false);
