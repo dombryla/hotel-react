@@ -107,3 +107,51 @@ export const deleteWorker = ({status, id}: deleteWorkerProps) => {
     .then((response) => response.json())
     .catch((error) => console.log(error, "Something went bad"));
 };
+
+interface getEditWorkerDataProps {
+  status: string;
+  pathname: string;
+}
+
+export function getEditWorkerData({status, pathname}: getEditWorkerDataProps) {
+  const options = {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "",
+      "Content-Type": "application/json",
+      status: status,
+    },
+  };
+  return fetch(`${url}${pathname}`, options)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      throw Error(response.statusText);
+    })
+    .then((response) => response.json())
+    .catch((error) => console.log(error, "Something went bad"));
+}
+
+interface editWorkerProps {
+  data: UserProps;
+  pathname: string;
+}
+
+export function editWorker({data, pathname}: editWorkerProps) {
+  const options = {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  fetch(`${url}${pathname}`, options)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      throw Error(response.statusText);
+    })
+    .catch((error) => console.log(error, "Something went bad"));
+}

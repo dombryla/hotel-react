@@ -4,6 +4,9 @@ import {useUser} from "../../context/userContext";
 import {useLocation} from "react-router-dom";
 import {UserProps} from "../../components/form-hire";
 import {DeleteButton} from "../../components/delete-button";
+import {Link} from "react-router-dom";
+
+import "../../components/delete-button.css";
 
 import "./list-worker.css";
 
@@ -21,7 +24,6 @@ export const ListWorker: React.FC = () => {
   }, [employer, status, pathname]);
 
   if (!dataWorker) return <div>Loading...</div>;
-  console.log(dataWorker);
   const tableWorker = dataWorker.map((worker, i) => {
     const workerId = worker.managerId ? worker.managerId : worker.employeeId;
     return (
@@ -37,9 +39,9 @@ export const ListWorker: React.FC = () => {
         <td>{worker.startDate}</td>
         <td>{worker.terminationDate}</td>
         <td>
-          <DeleteButton status={status} id={workerId}>
-            edit
-          </DeleteButton>
+          <Link to={`/edit/${workerId}`}>
+            <button className="deleteButton">edit</button>
+          </Link>
           <DeleteButton status={status} id={workerId}>
             delete
           </DeleteButton>

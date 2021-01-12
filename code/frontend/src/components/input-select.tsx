@@ -1,45 +1,44 @@
 import React from "react";
-import {useLocation} from "react-router-dom";
 
 import "./input-select.css";
 
 const positions = [
-  {value: "Front Office Manager", path: "/hire/new-manager"},
-  {value: "Receptionist", path: "/hire/new-worker"},
-  {value: "Bellboy", status: "/hire/new-worker"},
-  {value: "Executive Housekeeper", path: "/hire/new-manager"},
-  {value: "Housekeeper", path: "/hire/new-worker"},
-  {value: "Restaurant Manager", path: "/hire/new-manager"},
-  {value: "Chef", path: "/hire/new-manager"},
-  {value: "Cooks", path: "/hire/new-worker"},
-  {value: "Waiter", path: "/hire/new-worker"},
-  {value: "Bar Manager", path: "/hire/new-manager"},
-  {value: "Barman", path: "/hire/new-worker"},
-  {value: "Barist", path: "/hire/new-worker"},
-  {value: "Technical Manager", path: "/hire/new-manager"},
-  {value: "Conservator", path: "/hire/new-worker"},
-  {value: "Accountant", path: "/hire/new-worker"},
-  {value: "Event Planner", path: "/hire/new-worker"},
-  {value: "Concierge", path: "/hire/new-worker"},
-  {value: "Meeting Coordinator", path: "/hire/new-worker"},
-  {value: "BOSS!!!", path: "/hire/new-director"},
+  {value: "Front Office Manager", status: "director"},
+  {value: "Receptionist", status: "manager"},
+  {value: "Bellboy", status: "manager"},
+  {value: "Executive Housekeeper", status: "director"},
+  {value: "Housekeeper", status: "manager"},
+  {value: "Restaurant Manager", status: "director"},
+  {value: "Chef", status: "director"},
+  {value: "Cooks", status: "manager"},
+  {value: "Waiter", status: "manager"},
+  {value: "Bar Manager", status: "director"},
+  {value: "Barman", status: "manager"},
+  {value: "Barist", status: "manager"},
+  {value: "Technical Manager", status: "director"},
+  {value: "Conservator", status: "manager"},
+  {value: "Accountant", status: "manager"},
+  {value: "Event Planner", status: "manager"},
+  {value: "Concierge", status: "manager"},
+  {value: "Meeting Coordinator", status: "manager"},
+  {value: "BOSS!!!", status: "/hire/new-director"},
 ];
 
 interface InputSelectProps {
   name: string;
   title: string;
+  status: string;
   reference: any;
 }
 
 export const InputSelect: React.FC<InputSelectProps> = ({
   name,
   title,
+  status,
   reference,
 }) => {
-  const {pathname} = useLocation();
-
   const options = positions
-    .filter((option) => option.path === pathname)
+    .filter((option) => option.status === status)
     .map((option) => (
       <option key={option.value} value={option.value}>
         {option.value}

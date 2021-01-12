@@ -10,6 +10,7 @@ interface InputFormProps {
   errorMessage: string;
   title: string;
   type?: string;
+  defaultValue?: string | number;
 }
 export const InputForm: React.FC<InputFormProps> = ({
   name,
@@ -18,6 +19,7 @@ export const InputForm: React.FC<InputFormProps> = ({
   errorMessage,
   type,
   title,
+  defaultValue,
 }) => {
   const [isActive, setIsActive] = useState(false);
   return (
@@ -34,6 +36,7 @@ export const InputForm: React.FC<InputFormProps> = ({
             name={name}
             ref={reference}
             type={type}
+            defaultValue={defaultValue}
           ></input>
           {error ? <MsgRed>{errorMessage}</MsgRed> : <MsgRed>{"   "}</MsgRed>}
         </div>

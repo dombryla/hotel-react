@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {useUser} from "../context/userContext";
 
@@ -9,7 +9,11 @@ import {InputData} from "./input-data";
 import {MsgRed} from "./msg-red";
 import {Button} from "./button";
 
-import {addWorker} from "../workerBackendFrontend";
+import {
+  addWorker,
+  getEditWorkerData,
+  editWorker,
+} from "../workerBackendFrontend";
 
 import "./form-hire.css";
 
@@ -34,13 +38,20 @@ export type UserProps = {
   startDate: string;
   terminationDate: string;
   employer?: number;
+  status?: string;
 };
 
-export const FormHire: React.FC = () => {
+export const FormEdit: React.FC = () => {
   const user = useUser();
   const status = user.status;
+  const [worker, setWorker] = useState<UserProps>();
   const {pathname} = useLocation();
 
+  useEffect(() => {
+    getEditWorkerData({status, pathname}).then((data) => {
+      setWorker(data[0]);
+    });
+  }, [status, pathname]);
   const employer = user.directorId ? user.directorId : user.managerId;
 
   const {register, handleSubmit, errors} = useForm<UserProps>({
@@ -48,14 +59,38 @@ export const FormHire: React.FC = () => {
   });
 
   const onSubmit = (data: UserProps) => {
-    addWorker({data, pathname, employer});
+    data.status = status;
+    editWorker({data, pathname});
   };
+
+  if (worker === undefined) {
+    return <div>pusto</div>;
+  }
+  const {
+    login,
+    password,
+    email,
+    firstName,
+    lastName,
+    sex,
+    birthDate,
+    phoneNumber,
+    street,
+    postCode,
+    city,
+    pesel,
+    salary,
+    position,
+    startDate,
+    terminationDate,
+  } = worker;
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="newWorkerForm">
         <div className="formColumn">
           <InputForm
+            defaultValue={login}
             title="Login"
             name="login"
             reference={register({required: true, minLength: 5})}
@@ -68,11 +103,13 @@ export const FormHire: React.FC = () => {
             type="password"
             reference={register({
               pattern: /(?=.*[a-z]{1,})(?=.*[A-Z]{1,})(?=.*[1-9]{1,})[\w!@#$%^&*łążźćśńóŁĄŻŹĆŃÓ()+]{5,16}/,
+              required: true,
             })}
             error={errors.password ? true : false}
             errorMessage="Password includes a lower, upper case and a number."
           ></InputForm>
           <InputForm
+            defaultValue={email}
             title="Email"
             name="email"
             reference={register({
@@ -82,6 +119,7 @@ export const FormHire: React.FC = () => {
             errorMessage="Please enter the valid email."
           ></InputForm>
           <InputForm
+            defaultValue={firstName}
             title="First name"
             name="firstName"
             reference={register({required: true})}
@@ -89,6 +127,7 @@ export const FormHire: React.FC = () => {
             errorMessage="This field is required"
           ></InputForm>
           <InputForm
+            defaultValue={lastName}
             title="Last name"
             name="lastName"
             reference={register({required: true})}
@@ -126,6 +165,7 @@ export const FormHire: React.FC = () => {
             </div>
           </label>
           <InputData
+            defaultValue={birthDate}
             title="Birth Date"
             name="birthDate"
             reference={register({required: true})}
@@ -133,6 +173,7 @@ export const FormHire: React.FC = () => {
             errorMessage="This field is required"
           ></InputData>
           <InputForm
+            defaultValue={phoneNumber}
             title="Phone number"
             type="number"
             name="phoneNumber"
@@ -141,6 +182,7 @@ export const FormHire: React.FC = () => {
             errorMessage="Phone number consist 9 digits."
           ></InputForm>
           <InputForm
+            defaultValue={street}
             title="Street"
             name="street"
             reference={register({required: true})}
@@ -150,6 +192,7 @@ export const FormHire: React.FC = () => {
         </div>
         <div className="formColumn">
           <InputForm
+            defaultValue={postCode}
             title="Post code"
             name="postCode"
             reference={register({pattern: /^[0-9]{2}-[0-9]{3}$/})}
@@ -157,6 +200,7 @@ export const FormHire: React.FC = () => {
             errorMessage="Please enter valid post code."
           ></InputForm>
           <InputForm
+            defaultValue={city}
             title="City"
             name="city"
             reference={register({required: true})}
@@ -164,6 +208,7 @@ export const FormHire: React.FC = () => {
             errorMessage="This field is required"
           ></InputForm>
           <InputForm
+            defaultValue={pesel}
             title="PESEL"
             type="number"
             name="pesel"
@@ -172,6 +217,7 @@ export const FormHire: React.FC = () => {
             errorMessage="PESEL consist of 11 digits."
           ></InputForm>
           <InputForm
+            defaultValue={salary}
             title="Salary"
             type="number"
             name="salary"
@@ -186,6 +232,7 @@ export const FormHire: React.FC = () => {
             reference={register({required: true})}
           ></InputSelect>
           <InputData
+            defaultValue={startDate}
             title="Start Date"
             name="startDate"
             reference={register({required: true})}
@@ -193,6 +240,7 @@ export const FormHire: React.FC = () => {
             errorMessage="This field is required"
           ></InputData>
           <InputData
+            defaultValue={terminationDate}
             title="Termination Date"
             name="terminationDate"
             reference={register({required: true})}
