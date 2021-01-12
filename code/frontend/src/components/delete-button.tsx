@@ -1,14 +1,21 @@
 import React from "react";
-import "./submit-button.css";
+import {deleteWorker} from "../workerBackendFrontend";
+import "./delete-button.css";
 
 interface DeleteButtonProps {
-  handleDelete(workerId: number): any;
+  status: "director" | "manager";
+  id: number | undefined;
   children: string;
 }
 
 export const DeleteButton: React.FC<DeleteButtonProps> = ({
   children,
-  handleDelete,
+  status,
+  id,
 }) => {
-  return <button className="submitButton">{children}</button>;
+  return (
+    <button className="deleteButton" onClick={() => deleteWorker({status, id})}>
+      {children}
+    </button>
+  );
 };

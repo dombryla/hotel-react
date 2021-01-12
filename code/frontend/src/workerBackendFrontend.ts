@@ -83,3 +83,27 @@ export const getWorkerList = ({
     .then((response) => response.json())
     .catch((error) => console.log(error, "Something went bad"));
 };
+
+export interface deleteWorkerProps {
+  status: "director" | "manager";
+  id: number | undefined;
+}
+
+export const deleteWorker = ({status, id}: deleteWorkerProps) => {
+  const options = {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json",
+      status: status,
+    },
+  };
+  return fetch(`${url}/delete/${id}`, options)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      throw Error(response.statusText);
+    })
+    .then((response) => response.json())
+    .catch((error) => console.log(error, "Something went bad"));
+};

@@ -16,6 +16,7 @@ import "./form-hire.css";
 export type UserProps = {
   directorId?: number;
   managerId?: number;
+  employeeId?: number;
   login: string;
   password: string;
   email: string;

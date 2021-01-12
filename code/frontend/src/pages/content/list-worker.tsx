@@ -3,6 +3,7 @@ import {getWorkerList} from "../../workerBackendFrontend";
 import {useUser} from "../../context/userContext";
 import {useLocation} from "react-router-dom";
 import {UserProps} from "../../components/form-hire";
+import {DeleteButton} from "../../components/delete-button";
 
 import "./list-worker.css";
 
@@ -20,8 +21,9 @@ export const ListWorker: React.FC = () => {
   }, [employer, status, pathname]);
 
   if (!dataWorker) return <div>Loading...</div>;
+  console.log(dataWorker);
   const tableWorker = dataWorker.map((worker, i) => {
-    const workerId = worker.directorId ? worker.directorId : worker.managerId;
+    const workerId = worker.managerId ? worker.managerId : worker.employeeId;
     return (
       <tr key={workerId}>
         <th>{i + 1}</th>
@@ -34,6 +36,14 @@ export const ListWorker: React.FC = () => {
         <td>{worker.position}</td>
         <td>{worker.startDate}</td>
         <td>{worker.terminationDate}</td>
+        <td>
+          <DeleteButton status={status} id={workerId}>
+            edit
+          </DeleteButton>
+          <DeleteButton status={status} id={workerId}>
+            delete
+          </DeleteButton>
+        </td>
       </tr>
     );
   });
