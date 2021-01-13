@@ -1,4 +1,4 @@
-import {UserProps} from "./components/form-hire";
+import {UserProps} from "./components/form";
 
 const url = "http://localhost:2000";
 

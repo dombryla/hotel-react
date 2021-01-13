@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {getWorkerList} from "../../workerBackendFrontend";
 import {useUser} from "../../context/userContext";
 import {useLocation} from "react-router-dom";
-import {UserProps} from "../../components/form-hire";
+import {UserProps} from "../../components/form";
 import {DeleteButton} from "../../components/delete-button";
 import {Link} from "react-router-dom";
 
