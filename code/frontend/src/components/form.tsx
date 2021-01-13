@@ -46,7 +46,7 @@ export const Form = ({worker, onSubmit, status}: FormProps) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="newWorkerForm">
+      <form onSubmit={handleSubmit(onSubmit)} className="workerForm">
         <div className="formColumn">
           <InputForm
             defaultValue={worker ? worker.login : ""}
@@ -73,6 +73,7 @@ export const Form = ({worker, onSubmit, status}: FormProps) => {
             name="email"
             reference={register({
               pattern: /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/,
+              required: true,
             })}
             error={errors.email ? true : false}
             errorMessage="Please enter the valid email."
@@ -154,7 +155,10 @@ export const Form = ({worker, onSubmit, status}: FormProps) => {
             defaultValue={worker ? worker.postCode : ""}
             title="Post code"
             name="postCode"
-            reference={register({pattern: /^[0-9]{2}-[0-9]{3}$/})}
+            reference={register({
+              pattern: /^[0-9]{2}-[0-9]{3}$/,
+              required: true,
+            })}
             error={errors.postCode ? true : false}
             errorMessage="Please enter valid post code."
           ></InputForm>

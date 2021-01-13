@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import {useUser} from "../context/userContext";
+import {useUser} from "../../context/userContext";
 
-import {getEditWorkerData, editWorker} from "../workerBackendFrontend";
-import {Form, UserProps} from "../components/form";
+import {getEditWorkerData, editWorker} from "../../workerBackendFrontend";
+import {Form, UserProps} from "../../components/form";
 
-export const FormEdit: React.FC = () => {
+export const EditWorker: React.FC = () => {
   const {status} = useUser();
   const [worker, setWorker] = useState<UserProps>();
   const {pathname} = useLocation();
