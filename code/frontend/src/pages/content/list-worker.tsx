@@ -18,9 +18,11 @@ export const ListWorker: React.FC = () => {
   const [dataWorker, setDataWorker] = useState<Array<UserProps> | null>(null);
 
   useEffect(() => {
-    getWorkerList({employer, status, pathname}).then((data) => {
+    async function getWorkers() {
+      const data = await getWorkerList({employer, status, pathname});
       setDataWorker(data);
-    });
+    }
+    getWorkers();
   }, [employer, status, pathname]);
 
   if (!dataWorker) return <div>Loading...</div>;

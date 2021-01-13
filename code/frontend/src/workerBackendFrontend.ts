@@ -43,7 +43,6 @@ export const addWorker = ({data, pathname, employer}: addWorkerProps) => {
       "Content-Type": "application/json",
     },
   };
-  console.log(data);
   fetch(`${url}${pathname}`, options)
     .then((response) => {
       if (response.ok) {
