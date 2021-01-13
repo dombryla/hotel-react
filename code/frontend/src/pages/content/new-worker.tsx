@@ -14,13 +14,9 @@ export const NewWorker: React.FC = () => {
 
   const employer = user.directorId ? user.directorId : user.managerId;
 
-  const onSubmit = async (data: UserProps) => {
-    try {
-      await addWorker({data, pathname, employer});
-      setShowModal(true);
-    } catch (err) {
-      throw Error();
-    }
+  const onSubmit = (data: UserProps) => {
+    addWorker({data, pathname, employer});
+    setShowModal(true);
   };
 
   return (
