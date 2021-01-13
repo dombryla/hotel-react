@@ -7,7 +7,7 @@ import {InputData} from "./input-data";
 import {MsgRed} from "./msg-red";
 import {Button} from "./button";
 
-import "./form-hire.css";
+import "./form.css";
 
 export type UserProps = {
   directorId?: number;
@@ -46,7 +46,7 @@ export const Form = ({worker, onSubmit, status}: FormProps) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="newWorkerForm">
+      <form onSubmit={handleSubmit(onSubmit)} className="workerForm">
         <div className="formColumn">
           <InputForm
             defaultValue={worker ? worker.login : ""}
