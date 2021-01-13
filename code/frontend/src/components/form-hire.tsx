@@ -5,8 +5,6 @@ import {useUser} from "../context/userContext";
 import {addWorker} from "../workerBackendFrontend";
 import {Form, UserProps} from "../components/form";
 
-import "./form-hire.css";
-
 export const FormHire: React.FC = () => {
   const user = useUser();
   const status = user.status;

@@ -5,8 +5,6 @@ import {useUser} from "../context/userContext";
 import {getEditWorkerData, editWorker} from "../workerBackendFrontend";
 import {Form, UserProps} from "../components/form";
 
-import "./form-hire.css";
-
 export const FormEdit: React.FC = () => {
   const {status} = useUser();
   const [worker, setWorker] = useState<UserProps>();

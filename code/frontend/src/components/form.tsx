@@ -7,7 +7,7 @@ import {InputData} from "./input-data";
 import {MsgRed} from "./msg-red";
 import {Button} from "./button";
 
-import "./form-hire.css";
+import "./form.css";
 
 export type UserProps = {
   directorId?: number;
