@@ -98,7 +98,10 @@ interface getEditWorkerDataProps {
   pathname: string;
 }
 
-export function getEditWorkerData({status, pathname}: getEditWorkerDataProps) {
+export const getEditWorkerData = async ({
+  status,
+  pathname,
+}: getEditWorkerDataProps) => {
   const options = {
     method: "GET",
     headers: {
@@ -107,16 +110,12 @@ export function getEditWorkerData({status, pathname}: getEditWorkerDataProps) {
       status: status,
     },
   };
-  return fetch(`${url}${pathname}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .then((response) => response.json())
-    .catch((error) => console.log(error, "Something went bad"));
-}
+  const response = await fetch(`${url}${pathname}`, options);
+  if (response.ok) {
+    return response.json();
+  }
+  throw Error(response.statusText);
+};
 
 interface editWorkerProps {
   data: UserProps;
