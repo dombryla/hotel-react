@@ -266,7 +266,7 @@ module.exports = {
             ),
           ])
         )
-        .then(resolve())
+        .then((msg) => res.send({msg: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },
@@ -320,7 +320,7 @@ module.exports = {
             ),
           ])
         )
-        .then(resolve())
+        .then((msg) => res.send({msg: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },
@@ -336,7 +336,7 @@ module.exports = {
             removeFromDB(DETELE_FROM_LOG_DETAILS, result.logDetailId),
           ])
         )
-        .then(resolve())
+        .then((msg) => res.send({status: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },
@@ -351,7 +351,7 @@ module.exports = {
             removeFromDB(DETELE_FROM_LOG_DETAILS, result.logDetailId),
           ])
         )
-        .then(resolve())
+        .then((msg) => res.send({status: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },

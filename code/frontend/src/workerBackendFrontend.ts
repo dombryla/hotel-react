@@ -7,7 +7,7 @@ type getWorkerDataProps = {
   password: string;
 };
 
-export const getWorkerData = ({login, password}: getWorkerDataProps) => {
+export const getWorkerData = async ({login, password}: getWorkerDataProps) => {
   const options = {
     method: "GET",
     headers: {
@@ -16,15 +16,12 @@ export const getWorkerData = ({login, password}: getWorkerDataProps) => {
       password: password,
     },
   };
-  return fetch(`${url}/login`, options)
-    .then((response) => {
-      if (response.status === 200 || response.status === 401) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .then((response) => response.json())
-    .catch((error) => console.log(error, "Something went bad"));
+  const response = await fetch(`${url}/login`, options);
+  if (response.status === 200 || response.status === 401) {
+    return response.json();
+  } else {
+    throw Error(response.statusText);
+  }
 };
 
 interface addWorkerProps {
@@ -50,12 +47,12 @@ export const addWorker = async ({data, pathname, employer}: addWorkerProps) => {
 };
 
 export interface getWorkerListProps {
-  employer: string;
+  employer: number;
   status: string;
   pathname: string;
 }
 
-export const getWorkerList = ({
+export const getWorkerList = async ({
   employer,
   status,
   pathname,
@@ -65,26 +62,23 @@ export const getWorkerList = ({
     headers: {
       "Content-Type": "application/json",
       status: status,
-      employerId: employer,
+      employerId: employer.toString(),
     },
   };
-  return fetch(`${url}${pathname}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .then((response) => response.json())
-    .catch((error) => console.log(error, "Something went bad"));
+  const response = await fetch(`${url}${pathname}`, options);
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw Error(response.statusText);
+  }
 };
 
 export interface deleteWorkerProps {
-  status: "director" | "manager" | "worker";
-  id: number | undefined;
+  status: string;
+  workerId: number | undefined;
 }
 
-export const deleteWorker = ({status, id}: deleteWorkerProps) => {
+export const deleteWorker = async ({status, workerId}: deleteWorkerProps) => {
   const options = {
     method: "delete",
     headers: {
@@ -92,15 +86,11 @@ export const deleteWorker = ({status, id}: deleteWorkerProps) => {
       status: status,
     },
   };
-  return fetch(`${url}/delete/${id}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .then((response) => response.json())
-    .catch((error) => console.log(error, "Something went bad"));
+  const response = await fetch(`${url}/delete/${workerId}`, options);
+  if (response.ok) {
+    return response.status;
+  }
+  throw Error(response.statusText);
 };
 
 interface getEditWorkerDataProps {
@@ -133,7 +123,7 @@ interface editWorkerProps {
   pathname: string;
 }
 
-export function editWorker({data, pathname}: editWorkerProps) {
+export const editWorker = async ({data, pathname}: editWorkerProps) => {
   const options = {
     method: "PUT",
     body: JSON.stringify(data),
@@ -141,12 +131,9 @@ export function editWorker({data, pathname}: editWorkerProps) {
       "Content-Type": "application/json",
     },
   };
-  fetch(`${url}${pathname}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .catch((error) => console.log(error, "Something went bad"));
-}
+  const response = await fetch(`${url}${pathname}`, options);
+  if (response.ok) {
+    return response.status;
+  }
+  throw Error(response.statusText);
+};
