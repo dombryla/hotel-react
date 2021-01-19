@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useHistory} from "react-router-dom";
 import {useUser} from "../../context/userContext";
 
 import {addWorker} from "../../workerBackendFrontend";
@@ -8,22 +8,42 @@ import {Modal} from "../../components/modal";
 
 export const NewWorker: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const user = useUser();
-  const status = user.status;
+  const [messageModal, setMessageModal] = useState("");
+  const user: UserProps = useUser();
+  const {status} = user;
   const {pathname} = useLocation();
+  const history = useHistory();
 
   const employer = user.directorId ? user.directorId : user.managerId;
 
-  const onSubmit = (data: UserProps) => {
-    addWorker({data, pathname, employer});
-    setShowModal(true);
+  const onSubmit = async (data: UserProps) => {
+    if (employer) {
+      try {
+        await addWorker({data, pathname, employer});
+        setMessageModal("The user has been added to the database");
+        setShowModal(true);
+      } catch (err) {
+        console.log(err);
+        setMessageModal("Something went bad");
+        setShowModal(true);
+      }
+    }
+  };
+
+  const modalClick = () => {
+    setShowModal(false);
+    if (status === "director") {
+      history.push("/list/managers");
+    } else {
+      history.push("/list/workers");
+    }
   };
 
   return (
     <>
       <Form status={status} onSubmit={onSubmit} />
-      <Modal open={showModal} onClick={() => setShowModal(false)}>
-        The user has been added to the database
+      <Modal open={showModal} onClick={modalClick}>
+        {messageModal}
       </Modal>
     </>
   );

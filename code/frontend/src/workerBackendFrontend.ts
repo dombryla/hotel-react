@@ -33,9 +33,8 @@ interface addWorkerProps {
   employer: number;
 }
 
-export const addWorker = ({data, pathname, employer}: addWorkerProps) => {
+export const addWorker = async ({data, pathname, employer}: addWorkerProps) => {
   data.employer = employer;
-
   const options = {
     method: "POST",
     body: JSON.stringify(data),
@@ -43,14 +42,11 @@ export const addWorker = ({data, pathname, employer}: addWorkerProps) => {
       "Content-Type": "application/json",
     },
   };
-  fetch(`${url}${pathname}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .catch((error) => console.log(error, "Something went bad"));
+  const response = await fetch(`${url}${pathname}`, options);
+  if (response.ok) {
+    return response.status;
+  }
+  throw Error(response.statusText);
 };
 
 export interface getWorkerListProps {
@@ -84,7 +80,7 @@ export const getWorkerList = ({
 };
 
 export interface deleteWorkerProps {
-  status: "director" | "manager";
+  status: "director" | "manager" | "worker";
   id: number | undefined;
 }
 
