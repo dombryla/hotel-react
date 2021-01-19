@@ -142,7 +142,7 @@ module.exports = {
         .then((worker) =>
           insertEmployment(INSERT_INTO_EMPLOYMENT_MANAGER, employer, worker)
         )
-        .then(resolve())
+        .then((msg) => res.send({msg: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },
@@ -202,7 +202,7 @@ module.exports = {
         .then((worker) =>
           insertEmployment(INSERT_INTO_EMPLOYMENT_WORKER, employer, worker)
         )
-        .then(resolve())
+        .then((msg) => res.send({msg: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },

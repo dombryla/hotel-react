@@ -30,7 +30,7 @@ export type UserProps = {
   startDate: string;
   terminationDate: string;
   employer?: number;
-  status?: string;
+  status: "director" | "manager" | "worker";
 };
 
 type FormProps = {
