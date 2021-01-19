@@ -7,12 +7,13 @@ import {Form, UserProps} from "../../components/form";
 import {Modal} from "../../components/modal";
 
 export const NewWorker: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [messageModal, setMessageModal] = useState("");
   const user: UserProps = useUser();
   const {status} = user;
   const {pathname} = useLocation();
   const history = useHistory();
+
+  const [showModal, setShowModal] = useState(false);
+  const [messageModal, setMessageModal] = useState("");
 
   const employer = user.directorId ? user.directorId : user.managerId;
 
