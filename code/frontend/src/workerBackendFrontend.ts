@@ -55,7 +55,7 @@ export interface getWorkerListProps {
   pathname: string;
 }
 
-export const getWorkerList = ({
+export const getWorkerList = async ({
   employer,
   status,
   pathname,
@@ -68,15 +68,12 @@ export const getWorkerList = ({
       employerId: employer,
     },
   };
-  return fetch(`${url}${pathname}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .then((response) => response.json())
-    .catch((error) => console.log(error, "Something went bad"));
+  const response = await fetch(`${url}${pathname}`, options);
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw Error(response.statusText);
+  }
 };
 
 export interface deleteWorkerProps {
