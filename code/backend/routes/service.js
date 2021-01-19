@@ -266,7 +266,7 @@ module.exports = {
             ),
           ])
         )
-        .then(resolve())
+        .then((msg) => res.send({msg: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },
@@ -320,7 +320,7 @@ module.exports = {
             ),
           ])
         )
-        .then(resolve())
+        .then((msg) => res.send({msg: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },

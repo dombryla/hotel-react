@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {getWorkerList, deleteWorker} from "../../workerBackendFrontend";
 import {useUser} from "../../context/userContext";
-import {useLocation, useHistory} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {UserProps} from "../../components/form";
 import {Modal} from "../../components/modal";
 import {Link} from "react-router-dom";
@@ -11,14 +11,10 @@ import "../../components/delete-button.css";
 import "./list-worker.css";
 
 export const ListWorker: React.FC = () => {
-  const user: UserProps = useUser();
-  const {status} = user;
-  const employer = user.directorId ? user.directorId : user.managerId;
+  const {status, directorId, managerId}: UserProps = useUser();
+  const employer = directorId ? directorId : managerId;
   const {pathname} = useLocation();
   const [dataWorker, setDataWorker] = useState<Array<UserProps> | null>(null);
-
-  const history = useHistory();
-
   const [showModal, setShowModal] = useState(false);
   const [messageModal, setMessageModal] = useState("");
 
@@ -40,7 +36,7 @@ export const ListWorker: React.FC = () => {
     console.log(`status ${status}, workerId ${workerId}`);
     try {
       await deleteWorker({status, workerId});
-      setMessageModal("The user has been deleted");
+      setMessageModal("The user has been succesfully deleted from database");
       setShowModal(true);
     } catch (err) {
       setMessageModal("Something went bad");
@@ -50,11 +46,6 @@ export const ListWorker: React.FC = () => {
 
   const modalClick = () => {
     setShowModal(false);
-    if (status === "director") {
-      history.push("/list/managers");
-    } else {
-      history.push("/list/workers");
-    }
   };
 
   if (!dataWorker) return <div>Loading...</div>;

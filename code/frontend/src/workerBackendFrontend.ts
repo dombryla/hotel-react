@@ -123,7 +123,7 @@ interface editWorkerProps {
   pathname: string;
 }
 
-export function editWorker({data, pathname}: editWorkerProps) {
+export const editWorker = async ({data, pathname}: editWorkerProps) => {
   const options = {
     method: "PUT",
     body: JSON.stringify(data),
@@ -131,12 +131,9 @@ export function editWorker({data, pathname}: editWorkerProps) {
       "Content-Type": "application/json",
     },
   };
-  fetch(`${url}${pathname}`, options)
-    .then((response) => {
-      if (response.ok) {
-        return response;
-      }
-      throw Error(response.statusText);
-    })
-    .catch((error) => console.log(error, "Something went bad"));
-}
+  const response = await fetch(`${url}${pathname}`, options);
+  if (response.ok) {
+    return response.status;
+  }
+  throw Error(response.statusText);
+};
