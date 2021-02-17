@@ -1,20 +1,18 @@
-import {createContext, useContext, useReducer} from "react";
+import React, {createContext, useContext, useState} from "react";
+import {User} from "../model/user";
 
-type user = any;
+export const UserContext = createContext<User | undefined>(undefined);
 
-export const UserContext = createContext<user | undefined>(undefined);
-export const SetUserContext = createContext<user | undefined>(undefined);
+type SetUser = (user: User | undefined) => void;
 
-const reducer = (state: user, user: user) => {
-  return user;
-};
+export const SetUserContext = createContext<SetUser | undefined>(undefined);
 
 export const UserProvider: React.FC = ({children}) => {
-  const [token, dispatch] = useReducer(reducer, "");
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   return (
-    <UserContext.Provider value={token}>
-      <SetUserContext.Provider value={dispatch}>
+    <UserContext.Provider value={user}>
+      <SetUserContext.Provider value={setUser}>
         {children}
       </SetUserContext.Provider>
     </UserContext.Provider>

@@ -5,42 +5,18 @@ import {InputForm} from "./input-form";
 import {InputSelect} from "./input-select";
 import {InputData} from "./input-data";
 import {MsgRed} from "./msg-red";
-import {Button} from "./button";
 
 import "./form.css";
-
-export type UserProps = {
-  directorId?: number;
-  managerId?: number;
-  employeeId?: number;
-  login: string;
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  sex: string;
-  birthDate: string;
-  phoneNumber: string;
-  street: string;
-  postCode: string;
-  city: string;
-  pesel: string;
-  salary: number;
-  position: string;
-  startDate: string;
-  terminationDate: string;
-  employer?: number | undefined;
-  status: string;
-};
+import {User} from "../model/user";
 
 type FormProps = {
-  worker?: UserProps;
-  onSubmit: SubmitHandler<UserProps>;
+  worker?: User;
+  onSubmit: SubmitHandler<User>;
   status: string;
 };
 
 export const Form = ({worker, onSubmit, status}: FormProps) => {
-  const {register, handleSubmit, errors} = useForm<UserProps>({
+  const {register, handleSubmit, errors} = useForm<User>({
     mode: "all",
   });
 
@@ -210,7 +186,9 @@ export const Form = ({worker, onSubmit, status}: FormProps) => {
             error={errors.terminationDate ? true : false}
             errorMessage="This field is required"
           ></InputData>
-          <Button>Submit</Button>
+          <button className="submitButton" type="submit">
+            Login
+          </button>
         </div>
       </form>
     </>

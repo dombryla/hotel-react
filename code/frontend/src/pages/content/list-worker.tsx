@@ -2,19 +2,19 @@ import React, {useState, useEffect} from "react";
 import {getWorkerList, deleteWorker} from "../../workerBackendFrontend";
 import {useUser} from "../../context/userContext";
 import {useLocation} from "react-router-dom";
-import {UserProps} from "../../components/form";
 import {Modal} from "../../components/modal";
 import {Link} from "react-router-dom";
 
 import "../../components/delete-button.css";
 
 import "./list-worker.css";
+import {User} from "../../model/user";
 
 export const ListWorker: React.FC = () => {
-  const {status, directorId, managerId}: UserProps = useUser();
+  const {status, directorId, managerId}: User = useUser();
   const employer = directorId ? directorId : managerId;
   const {pathname} = useLocation();
-  const [dataWorker, setDataWorker] = useState<Array<UserProps> | null>(null);
+  const [dataWorker, setDataWorker] = useState<Array<User> | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [messageModal, setMessageModal] = useState("");
 

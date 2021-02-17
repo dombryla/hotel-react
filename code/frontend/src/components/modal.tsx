@@ -2,7 +2,7 @@ import React from "react";
 import "./modal.css";
 
 type ModalProps = {
-  onClick: any;
+  onClick: () => void;
   open: boolean;
 };
 

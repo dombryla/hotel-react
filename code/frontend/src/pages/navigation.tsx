@@ -7,62 +7,56 @@ const list = [
   {
     name: "Good Hotel",
     path: "/",
-    exact: true,
     status: "all",
+    exact: true,
     className: "logo",
   },
   {
     name: "New director",
     path: "/hire/new-director",
-    exact: false,
     status: "director",
   },
   {
     name: "New manager",
     path: "/hire/new-manager",
-    exact: false,
     status: "director",
+    exact: false,
   },
   {
     name: "New worker",
     path: "/hire/new-worker",
-    exact: false,
     status: "manager",
+    exact: false,
   },
   {
     name: "List Manager",
     path: "/list/managers",
-    exact: false,
     status: "director",
+    exact: false,
   },
   {
     name: "List Worker",
     path: "/list/workers",
-    exact: false,
     status: "manager",
+    exact: false,
   },
-  {name: "Contact", path: "/contact", exact: false, status: "all"},
+  {name: "Contact", path: "/contact", status: "all", exact: false},
   {
     name: "My Profile",
     path: "/profile",
-    exact: false,
     status: "all",
     className: "toRight",
+    exact: false,
   },
 ];
 
 export const Navigation = ({logout}: any) => {
-  const user = useUser();
-  const {status} = user;
+  const {status} = useUser();
   const navigation = list
     .filter((item) => item.status === status || item.status === "all")
     .map((item) => (
       <li key={item.name} className={`navigationItem ${item.className}`}>
-        <NavLink
-          to={item.path}
-          exact={item.exact ? item.exact : false}
-          activeClassName="selected"
-        >
+        <NavLink to={item.path} exact={item.exact} activeClassName="selected">
           {item.name}
         </NavLink>
       </li>

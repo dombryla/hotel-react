@@ -4,7 +4,10 @@ import {Content} from "./content/content";
 
 import "./user-panel.css";
 
-export const UserPanel = ({logout}: any) => {
+export type UserPanelProps = {
+  logout: () => void;
+};
+export const UserPanel: React.FC<UserPanelProps> = ({logout}) => {
   return (
     <>
       <div className="userPanelContainer">

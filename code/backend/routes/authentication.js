@@ -12,8 +12,7 @@ module.exports = {
     renderLoginPage(req, res, "");
   },
   login: (req, res) => {
-    let login = req.headers.login;
-    let password = req.headers.password;
+    const {login, password} = req.body;
     let user = "";
     let query = 'SELECT * FROM log_details WHERE login = "' + login + '"';
     db.query(query, (err, result) => {
