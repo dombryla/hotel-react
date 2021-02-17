@@ -80,7 +80,7 @@ app.put("/edit/:id", validate, checkValidationUpdate, editDetailsOfemployee);
 app.delete("/delete/:id", deleteEmployee);
 
 // app.get("/login", checkNotAuthenticated, getLoginPage);
-app.get("/login", login);
+app.post("/login", login);
 app.get("/logout", logout);
 
 app.listen(port, () => {

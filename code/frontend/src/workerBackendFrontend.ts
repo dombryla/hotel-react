@@ -1,42 +1,50 @@
-import {UserProps} from "./components/form";
+import {User} from "./model/user";
 
 const url = "http://localhost:2000";
 
-type getWorkerDataProps = {
+export type UserCredentials = {
   login: string;
   password: string;
 };
 
-export const getWorkerData = async ({login, password}: getWorkerDataProps) => {
-  const options = {
-    method: "GET",
+export const emptyCredentials: UserCredentials = {
+  login: "",
+  password: "",
+};
+
+type GetWorkerDataResponse = {
+  user: User;
+  msg: string;
+};
+
+export const getWorkerData = async (
+  userCrentials: UserCredentials
+): Promise<GetWorkerDataResponse> => {
+  const response = await fetch(`${url}/login`, {
+    method: "POST",
+    body: JSON.stringify(userCrentials),
     headers: {
       "Content-Type": "application/json",
-      login: login,
-      password: password,
     },
-  };
-  const response = await fetch(`${url}/login`, options);
-  if (response.status === 200 || response.status === 401) {
+  });
+  if (response.status === 200) {
     return response.json();
   } else {
     throw Error(response.statusText);
   }
 };
 
-interface addWorkerProps {
-  data: UserProps;
+type AddWorkerParams = {
+  newWorker: User;
   pathname: string;
-  employer: number;
-}
+};
 
-export const addWorker = async ({data, pathname, employer}: addWorkerProps) => {
-  data.employer = employer;
+export const addWorker = async ({newWorker, pathname}: AddWorkerParams) => {
   const options = {
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify(newWorker),
     headers: {
-      "Content-Type": "application/json",
+      "Contet-Typle": "application/json",
     },
   };
   const response = await fetch(`${url}${pathname}`, options);
@@ -46,17 +54,17 @@ export const addWorker = async ({data, pathname, employer}: addWorkerProps) => {
   throw Error(response.statusText);
 };
 
-export interface getWorkerListProps {
+export type GetWorkerListParams = {
   employer: number;
   status: string;
   pathname: string;
-}
+};
 
 export const getWorkerList = async ({
   employer,
   status,
   pathname,
-}: getWorkerListProps) => {
+}: GetWorkerListParams) => {
   const options = {
     method: "GET",
     headers: {
@@ -73,12 +81,12 @@ export const getWorkerList = async ({
   }
 };
 
-export interface deleteWorkerProps {
+export type DeleteWorkerParams = {
   status: string;
   workerId: number | undefined;
-}
+};
 
-export const deleteWorker = async ({status, workerId}: deleteWorkerProps) => {
+export const deleteWorker = async ({status, workerId}: DeleteWorkerParams) => {
   const options = {
     method: "delete",
     headers: {
@@ -93,15 +101,15 @@ export const deleteWorker = async ({status, workerId}: deleteWorkerProps) => {
   throw Error(response.statusText);
 };
 
-interface getEditWorkerDataProps {
+type GetEditWorkerDataParams = {
   status: string;
   pathname: string;
-}
+};
 
 export const getEditWorkerData = async ({
   status,
   pathname,
-}: getEditWorkerDataProps) => {
+}: GetEditWorkerDataParams) => {
   const options = {
     method: "GET",
     headers: {
@@ -113,16 +121,17 @@ export const getEditWorkerData = async ({
   const response = await fetch(`${url}${pathname}`, options);
   if (response.ok) {
     return response.json();
+  } else {
+    throw Error(response.statusText);
   }
-  throw Error(response.statusText);
 };
 
-interface editWorkerProps {
-  data: UserProps;
+type EditWorkerParams = {
+  data: User;
   pathname: string;
-}
+};
 
-export const editWorker = async ({data, pathname}: editWorkerProps) => {
+export const editWorker = async ({data, pathname}: EditWorkerParams) => {
   const options = {
     method: "PUT",
     body: JSON.stringify(data),

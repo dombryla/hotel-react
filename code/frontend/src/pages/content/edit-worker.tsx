@@ -3,12 +3,13 @@ import {useLocation, useHistory} from "react-router-dom";
 import {useUser} from "../../context/userContext";
 
 import {getEditWorkerData, editWorker} from "../../workerBackendFrontend";
-import {Form, UserProps} from "../../components/form";
+import {Form} from "../../components/form";
 import {Modal} from "../../components/modal";
+import {User} from "../../model/user";
 
 export const EditWorker: React.FC = () => {
   const {status} = useUser();
-  const [worker, setWorker] = useState<UserProps>();
+  const [worker, setWorker] = useState<User>();
   const {pathname} = useLocation();
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,7 @@ export const EditWorker: React.FC = () => {
     });
   }, [status, pathname]);
 
-  const onSubmit = async (data: UserProps) => {
+  const onSubmit = async (data: User) => {
     data.status = status;
     try {
       await editWorker({data, pathname});

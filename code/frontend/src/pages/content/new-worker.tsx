@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {useLocation, useHistory} from "react-router-dom";
 import {useUser} from "../../context/userContext";
-
 import {addWorker} from "../../workerBackendFrontend";
-import {Form, UserProps} from "../../components/form";
+import {Form} from "../../components/form";
 import {Modal} from "../../components/modal";
+import {getEmployerId, setEmployer, User} from "../../model/user";
 
 export const NewWorker: React.FC = () => {
-  const user: UserProps = useUser();
+  const user = useUser();
   const {status} = user;
   const {pathname} = useLocation();
   const history = useHistory();
@@ -15,19 +15,21 @@ export const NewWorker: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [messageModal, setMessageModal] = useState("");
 
-  const employer = user.directorId ? user.directorId : user.managerId;
+  const employerId = getEmployerId(user);
 
-  const onSubmit = async (data: UserProps) => {
-    if (employer) {
-      try {
-        await addWorker({data, pathname, employer});
-        setMessageModal("The user has been succesfully added to the database");
-        setShowModal(true);
-      } catch (err) {
-        console.log(err);
-        setMessageModal("Something went bad");
-        setShowModal(true);
-      }
+  const onSubmit = async (newWorker: User) => {
+    if (employerId == null) return;
+    try {
+      await addWorker({
+        newWorker: setEmployer(newWorker, employerId),
+        pathname,
+      });
+      setMessageModal("The user has been succesfully added to the database");
+      setShowModal(true);
+    } catch (err) {
+      console.log(err);
+      setMessageModal("Something went bad");
+      setShowModal(true);
     }
   };
 

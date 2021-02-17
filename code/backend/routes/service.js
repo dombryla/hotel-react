@@ -336,7 +336,8 @@ module.exports = {
             removeFromDB(DETELE_FROM_LOG_DETAILS, result.logDetailId),
           ])
         )
-        .then((msg) => res.send({status: "ok"}))
+        .then(resolve())
+        // .then((msg) => res.send({status: "ok"}))
         .catch((err) => res.status(500).send(err));
     });
   },
@@ -351,7 +352,7 @@ module.exports = {
             removeFromDB(DETELE_FROM_LOG_DETAILS, result.logDetailId),
           ])
         )
-        .then((msg) => res.send({status: "ok"}))
+        .then(resolve())
         .catch((err) => res.status(500).send(err));
     });
   },
